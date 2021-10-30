@@ -200,13 +200,13 @@
           stmt.execute(sql[0]);
           sb.delete(0,sb.length());
           ```
-     
+
           </br>
 
           
 
        2. campingcarlist (캠핑카 정보)
-     
+
           ```java
           // Campingcarlist availablecampingcarlist
           sql[1] = sb.append("create table Campingcarlist(")//table2
@@ -228,7 +228,7 @@
           <br/>
 
        3. campingcustomer (고객 테이블)
-     
+
           ```java
           // CampingCustomer 
           sql[2] = sb.append("create table CampingCustomer(")//table3
@@ -245,7 +245,7 @@
           <br/>
 
        4. presentrentcampingcarlist (현재 대여중인 캠핑카 테이블)
-     
+
           ```java
           //  PresentRentCampingcarList
           sql[3] = sb.append("create table PresentRentCampingcarList(")//table4
@@ -267,7 +267,7 @@
           <br/>
 
        5. carcheck (반환 후 수리가 필요한 차량 테이블)
-     
+
           ```java
           // CarCheck
           sql[4] = sb.append("create table CarCheck(")//table5
@@ -287,7 +287,7 @@
           </br>
 
        6. fixinformation (정비소별 정비내역 테이블)
-     
+
           ```java
           // FixInformation
           sql[5] = sb.append("create table FixInformation(")//table6
@@ -309,7 +309,7 @@
           <br/>
 
        7. carcenterlist (정비소 테이블)
-     
+
           ```java
           // CarcenterList
           sql[6] = sb.append("create table CarcenterList(")//table7
@@ -327,7 +327,7 @@
           <br/>
 
        8. availablecampingcarlist (대여가 가능한 캠핑카 테이블)
-     
+
           ```java
           // AvailableCampingcarlist
           sql[7] = sb.append("create table AvailableCampingcarlist(")//table8
@@ -349,7 +349,7 @@
           <br/>
 
      - > #### 데이터 초기화(초기 데이터 생성)
-     
+
        ```java
        public void insertMydata() { //초기data구현
            try{
@@ -474,7 +474,7 @@
            }
        }
        ```
-     
+
        </br>
 
    ---
@@ -550,7 +550,7 @@
             }
         }
         ```
-   
+
         </br>
 
      2. > #### 삭제
@@ -594,7 +594,7 @@
             }
         }
         ```
-   
+
         </br>
 
      3. > #### 변경
@@ -701,7 +701,7 @@
             }
         }
         ```
-   
+
         </br>
 
      4. > #### 반환
@@ -798,7 +798,7 @@
       **대여가능한 캠핑카 목록 검색** 
 
      ```java
-    else if(e.getSource() == UbtnSearch1) {//'대여가능한 캠핑카 목록 검색' 버튼을 눌렀을 때
+     else if(e.getSource() == UbtnSearch1) {//'대여가능한 캠핑카 목록 검색' 버튼을 눌렀을 때
          query = "SELECT * FROM availablecampingcarlist ";
          txtResult.setText("");
          txtResult.setText("차량 ID\t캠핑카이름\t차량번호 \t최대승차인원수  제조회사\t제조연도\t누적주행거리\t대여비용(1일)\t\n");
@@ -809,7 +809,7 @@
              txtResult.append(str);
          }
      ```
-   
+
      </br>
 
    - > #### 관리자
@@ -817,7 +817,7 @@
      1. **대여고객 및 대여차량 검색**
 
         ```java
-     else if(e.getSource() == AbtnSearch1) {//'대여고객 및 대여차량 검색' 버튼을 눌렀을 때
+        else if(e.getSource() == AbtnSearch1) {//'대여고객 및 대여차량 검색' 버튼을 눌렀을 때
             query = "select presentrentcampingcarlist.rentid, campingcarlist.carid, campingcarlist.carname, campingcustomer.licenseid, campingcustomer.customername,  campingcarlist.carnumber " + 
                 "from campingcustomer,presentrentcampingcarlist,campingcarlist " + 
                 "where presentrentcampingcarlist.licenseid = campingcustomer.licenseid and presentrentcampingcarlist.carid = campingcarlist.carid;";
@@ -831,13 +831,13 @@
             }
         }
         ```
-   
+
         </br>
 
      2. **수리가 필요한 차량 검색**
 
         ```java
-     else if(e.getSource() == AbtnSearch2) {//'수리가 필요한 차량 검색' 버튼을 눌렀을 때
+        else if(e.getSource() == AbtnSearch2) {//'수리가 필요한 차량 검색' 버튼을 눌렀을 때
             query = "select campingcarlist.carid, campingcarlist.carname, campingcarlist.companyid, campingcustomer.licenseid, campingcustomer.customername, carcheck.frontdescription, carcheck.leftdescription, carcheck.rightdescription, carcheck.backdescription " + 
                 "from carcheck,campingcarlist,campingcustomer " + 
                 "where carcheck.havetofix=1 and carcheck.carID = campingcarlist.carid and carcheck.licenseid=campingcustomer.licenseid "+
@@ -852,13 +852,13 @@
             }
         }
         ```
-   
+
         </br>
 
      3. **정비소별 정비내역**
 
         ```java
-     else if(e.getSource() == AbtnSearch3) {//'정비소별 정비 내역' 버튼을 눌렀을 때
+        else if(e.getSource() == AbtnSearch3) {//'정비소별 정비 내역' 버튼을 눌렀을 때
             query = "select  carcenterlist.carcenterid, carcenterlist.carcentername, fixinformation.fixid, fixinformation.companyid, companylist.companyname, fixinformation.carid, campingcarlist.carname, fixinformation.fixdate " + 
                 "from fixinformation,carcenterlist,campingcarlist,companylist " + 
                 "where fixinformation.carcenterid = carcenterlist.carcenterid and fixinformation.carid = campingcarlist.carid and fixinformation.companyid = companylist.companyid " + 
@@ -873,7 +873,7 @@
             }
         } 
         ```
-   
+
         </br>
 
      4. **고객별 청구할 수리비용 검색**
@@ -895,7 +895,7 @@
             }
         }
         ```
-   
+
      ​	</br>
 
    ---
