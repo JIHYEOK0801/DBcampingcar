@@ -104,20 +104,20 @@
 
 - ### 고객
 
-  1. ### 대여가능 캠핑카 검색
+  ### 1. 대여가능 캠핑카 검색
 
-     <img src = "https://github.com/JIHYEOK0801/record/blob/main/DBcampingcar/img/new_5.gif?raw=true">
+  <img src = "https://github.com/JIHYEOK0801/record/blob/main/DBcampingcar/img/new_5.gif?raw=true">
 
-     - '대여가능한 캠핑카 목록 검색' 버튼으로 수행
-     - 현재 대여 가능한 캠핑카의 목록을 검색하는 기능
+  - '대여가능한 캠핑카 목록 검색' 버튼으로 수행
+  - 현재 대여 가능한 캠핑카의 목록을 검색하는 기능
 
-     </br>
+  </br>
 
-  2. ### 캠핑카 대여 신청
+  ### 2. 캠핑카 대여 신청
 
-     <img src = "https://github.com/JIHYEOK0801/record/blob/main/DBcampingcar/img/new_6.gif?raw=true">
+  <img src = "https://github.com/JIHYEOK0801/record/blob/main/DBcampingcar/img/new_6.gif?raw=true">
 
-     - 양식 기입 후 '신청' 버튼으로 대여 신청 실행.
+  - 양식 기입 후 '신청' 버튼으로 대여 신청 실행.
 
   </br>
 
