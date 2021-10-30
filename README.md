@@ -173,166 +173,188 @@
 
    - > ### 테이블 생성 및 초기화
 
-     - companylist (대여회사 정보)
+     테이블을 생성하고, 초기데이터를 삽입하는 기능
 
-       ```java
-       // Companylist
-       	   sql[0] = sb.append("create table Companylist(")//table1
-                      .append("companyid INTEGER PRIMARY KEY,")//캠핑카대여회사ID
-                      .append("companyname varchar(45),")//회사명
-                      .append("companyaddress varchar(45),")//주소
-                      .append("companyphone varchar(45),")//전화번호
-                      .append("managername varchar(45),")//담당자이름
-                      .append("manageremail varchar(45)")//담당자이메일
-                      .append(");").toString();
-       	   	stmt.execute(sql[0]);
-       	   	sb.delete(0,sb.length());
-       ```
+     </br>
 
-       <br/>
+     #### 쿼리 형식
 
-     - campingcarlist (캠핑카 정보)
+     - **테이블 생성**
 
-       ```java
-       // Campingcarlist availablecampingcarlist
-       	   sql[1] = sb.append("create table Campingcarlist(")//table2
-                      .append("carid INTEGER PRIMARY KEY,")//캠핑카등록ID
-                      .append("carname varchar(45),")//캠핑카 이름
-                      .append("carnumber INTEGER,")//캠핑카 차량번호
-                      .append("carmax INTEGER,")//캠핑카 인원수
-                      .append("carbrand varchar(45),")//차제조회사
-                      .append("birthday DATE,")//제조연도
-                      .append("distance INTEGER,")//누적주행거리
-                      .append("rentprice INTEGER,")//캠핑카대여비용
-                      .append("companyid INTEGER,")//캠핑카대여회사ID
-                      .append("enrolldate DATE")//캠핑카등록일자
-                      .append(");").toString();
-       	   	stmt.execute(sql[1]);
-       	   	sb.delete(0,sb.length());
-       ```
+       CREATE TABLE 테이블명 (속성1, 속성2, 속성3...);
 
-       <br/>
+     - **데이터 초기화**
 
-     - campingcustomer (고객 테이블)
+       INSERT INTO 테이블명 VALUES (속성1, 속성2, 속성3...);
 
-       ```java
-       // CampingCustomer 
-       	   	sql[2] = sb.append("create table CampingCustomer(")//table3
-       	   			.append("licenseid INTEGER PRIMARY KEY,")//운전면허증번호
-       	   			.append("customername varchar(45),")//고객명
-       	   			.append("customeraddress varchar(45),")//고객주소
-       	   			.append("customerphone varchar(45),")//고객전화번호
-       	   			.append("customeremail varchar(45)")//고객이메일
-       	   			.append(");").toString();
-       	   	stmt.execute(sql[2]);
-       	   	sb.delete(0, sb.length());
-       ```
+       </br>
 
-       <br/>
+       ---
 
-     - presentrentcampingcarlist (현재 대여중인 캠핑카 테이블)
+     - #### 테이블 생성
 
-       ```java
-       //  PresentRentCampingcarList
-       	   	sql[3] = sb.append("create table PresentRentCampingcarList(")//table4
-       	   			.append("rentid INTEGER PRIMARY KEY,")//고유대여번호
-       	   			.append("carid INTEGER,")//캠핑카등록ID
-       	   			.append("licenseid INTEGER,")//운전면허증번호
-       	   			.append("companyid INTEGER,")//캠핑카대여회사ID
-       	   			.append("startdate DATE,")//대여시작일
-       	   			.append("enddate DATE,")//대여기간
-       	   			.append("rentprice INTEGER,")//청구요금
-       	   			.append("depositdate DATE,")//납입기한
-       	   			.append("etc varchar(45),")//기타청구내역
-       	   			.append("etcprice INTEGER")//기타청구요금정보
-       	   			.append(");").toString();
-       	   	stmt.execute(sql[3]);
-       	   	sb.delete(0,  sb.length());
-       ```
+       1. companylist (대여회사 정보)
 
-       <br/>
+          ```java
+          // Companylist
+          	   sql[0] = sb.append("create table Companylist(")//table1
+                         .append("companyid INTEGER PRIMARY KEY,")//캠핑카대여회사ID
+                         .append("companyname varchar(45),")//회사명
+                         .append("companyaddress varchar(45),")//주소
+                         .append("companyphone varchar(45),")//전화번호
+                         .append("managername varchar(45),")//담당자이름
+                         .append("manageremail varchar(45)")//담당자이메일
+                         .append(");").toString();
+          	   	stmt.execute(sql[0]);
+          	   	sb.delete(0,sb.length());
+          ```
 
-     - carcheck (반환 후 수리가 필요한 차량 테이블)
+          </br>
 
-       ```java
-       // CarCheck
-       	   	sql[4] = sb.append("create table CarCheck(")//table5
-       	   			.append("rentid INTEGER PRIMARY KEY,")//고유대여번호
-       	   			.append("carid INTEGER,")//캠핑카등록ID
-       	   			.append("frontdescription varchar(45),")//앞부분설명
-       	   			.append("leftdescription varchar(45),")//왼쪽설명
-       	   			.append("rightdescription varchar(45),")//오른쪽설명
-       	   			.append("backdescription varchar(45),")//뒤쪽설명
-       	   			.append("havetofix INTEGER,")//수리필요여부
-       	   			.append("licenseid INTEGER")//운전면허증번호
-       	   			.append(");").toString();
-       	   	stmt.execute(sql[4]);
-       	   	sb.delete(0,  sb.length());
-       ```
+       2. campingcarlist (캠핑카 정보)
 
-     - fixinformation (정비소별 정비내역 테이블)
+          ```java
+          // Campingcarlist availablecampingcarlist
+          	   sql[1] = sb.append("create table Campingcarlist(")//table2
+                         .append("carid INTEGER PRIMARY KEY,")//캠핑카등록ID
+                         .append("carname varchar(45),")//캠핑카 이름
+                         .append("carnumber INTEGER,")//캠핑카 차량번호
+                         .append("carmax INTEGER,")//캠핑카 인원수
+                         .append("carbrand varchar(45),")//차제조회사
+                         .append("birthday DATE,")//제조연도
+                         .append("distance INTEGER,")//누적주행거리
+                         .append("rentprice INTEGER,")//캠핑카대여비용
+                         .append("companyid INTEGER,")//캠핑카대여회사ID
+                         .append("enrolldate DATE")//캠핑카등록일자
+                         .append(");").toString();
+          	   	stmt.execute(sql[1]);
+          	   	sb.delete(0,sb.length());
+          ```
 
-       ```java
-       // FixInformation
-       	   	sql[5] = sb.append("create table FixInformation(")//table6
-       	   			.append("fixid INTEGER PRIMARY KEY,")//고유정비번호
-       	   			.append("carid INTEGER,")//캠핑카등록ID
-       	   			.append("carcenterid INTEGER,")//캠핑카정비소ID
-       	   			.append("companyid INTEGER,")//캠핑카대여회사ID
-       	   			.append("licenseid INTEGER,")//운전면허증번호
-       	   			.append("fix varchar(45),")//정비내역
-       	   			.append("fixdate DATE,")//수리날짜
-       	   			.append("fixprice INTEGER,")//수리비용
-       	   			.append("depositdate DATE,")//납입기한
-       	   			.append("etcfix varchar(45)")//기타정비내역
-       	   			.append(");").toString();
-       	   	stmt.execute(sql[5]);
-       	   	sb.delete(0,  sb.length());
-       ```
+          <br/>
 
-       <br/>
+       3. campingcustomer (고객 테이블)
 
-     - carcenterlist (정비소 테이블)
+          ```java
+          // CampingCustomer 
+          	   	sql[2] = sb.append("create table CampingCustomer(")//table3
+          	   			.append("licenseid INTEGER PRIMARY KEY,")//운전면허증번호
+          	   			.append("customername varchar(45),")//고객명
+          	   			.append("customeraddress varchar(45),")//고객주소
+          	   			.append("customerphone varchar(45),")//고객전화번호
+          	   			.append("customeremail varchar(45)")//고객이메일
+          	   			.append(");").toString();
+          	   	stmt.execute(sql[2]);
+          	   	sb.delete(0, sb.length());
+          ```
 
-       ```java
-        // CarcenterList
-       	   	sql[6] = sb.append("create table CarcenterList(")//table7
-       	   			.append("carcenterid INTEGER PRIMARY KEY,")//캠핑카정비소ID
-       	   			.append("carcentername varchar(45),")//정비소명
-       	   			.append("carcenteraddress varchar(45),")//정비소주소
-       	   			.append("carcenterphone varchar(45),")//정비소전화번호
-       	   			.append("centermanagername varchar(45),")//담당자이름
-       	   			.append("centermanageremail varchar(45)")//이메일정보
-       	   			.append(");").toString();
-       	   	stmt.execute(sql[6]);
-       	   	sb.delete(0,  sb.length());
-       ```
+          <br/>
 
-       <br/>
+       4. presentrentcampingcarlist (현재 대여중인 캠핑카 테이블)
 
-     - availablecampingcarlist (대여가 가능한 캠핑카 테이블)
+          ```java
+          //  PresentRentCampingcarList
+          	   	sql[3] = sb.append("create table PresentRentCampingcarList(")//table4
+          	   			.append("rentid INTEGER PRIMARY KEY,")//고유대여번호
+          	   			.append("carid INTEGER,")//캠핑카등록ID
+          	   			.append("licenseid INTEGER,")//운전면허증번호
+          	   			.append("companyid INTEGER,")//캠핑카대여회사ID
+          	   			.append("startdate DATE,")//대여시작일
+          	   			.append("enddate DATE,")//대여기간
+          	   			.append("rentprice INTEGER,")//청구요금
+          	   			.append("depositdate DATE,")//납입기한
+          	   			.append("etc varchar(45),")//기타청구내역
+          	   			.append("etcprice INTEGER")//기타청구요금정보
+          	   			.append(");").toString();
+          	   	stmt.execute(sql[3]);
+          	   	sb.delete(0,  sb.length());
+          ```
 
-       ```java
-       // AvailableCampingcarlist
-       	   	sql[7] = sb.append("create table AvailableCampingcarlist(")//table8
-       	   			.append("carid INTEGER PRIMARY KEY,")//캠핑카등록ID
-       	               .append("carname varchar(45),")//캠핑카 이름
-       	               .append("carnumber INTEGER,")//캠핑카 차량번호
-       	               .append("carmax INTEGER,")//캠핑카 인원수
-       	               .append("carbrand varchar(45),")//차제조회사
-       	               .append("birthday DATE,")//제조연도
-       	               .append("distance INTEGER,")//누적주행거리
-       	               .append("rentprice INTEGER,")//캠핑카대여비용
-       	               .append("companyid INTEGER,")//캠핑카대여회사ID
-       	               .append("enrolldate DATE")//캠핑카등록일자
-       	               .append(");").toString();
-       		   	stmt.execute(sql[7]);
-       		   	sb.delete(0,sb.length());
-       ```
+          <br/>
 
-       <br/>
+       5. carcheck (반환 후 수리가 필요한 차량 테이블)
 
-     - 데이터 초기화(초기 데이터 생성)
+          ```java
+          // CarCheck
+          	   	sql[4] = sb.append("create table CarCheck(")//table5
+          	   			.append("rentid INTEGER PRIMARY KEY,")//고유대여번호
+          	   			.append("carid INTEGER,")//캠핑카등록ID
+          	   			.append("frontdescription varchar(45),")//앞부분설명
+          	   			.append("leftdescription varchar(45),")//왼쪽설명
+          	   			.append("rightdescription varchar(45),")//오른쪽설명
+          	   			.append("backdescription varchar(45),")//뒤쪽설명
+          	   			.append("havetofix INTEGER,")//수리필요여부
+          	   			.append("licenseid INTEGER")//운전면허증번호
+          	   			.append(");").toString();
+          	   	stmt.execute(sql[4]);
+          	   	sb.delete(0,  sb.length());
+          ```
+
+          </br>
+
+       6. fixinformation (정비소별 정비내역 테이블)
+
+          ```java
+          // FixInformation
+          	   	sql[5] = sb.append("create table FixInformation(")//table6
+          	   			.append("fixid INTEGER PRIMARY KEY,")//고유정비번호
+          	   			.append("carid INTEGER,")//캠핑카등록ID
+          	   			.append("carcenterid INTEGER,")//캠핑카정비소ID
+          	   			.append("companyid INTEGER,")//캠핑카대여회사ID
+          	   			.append("licenseid INTEGER,")//운전면허증번호
+          	   			.append("fix varchar(45),")//정비내역
+          	   			.append("fixdate DATE,")//수리날짜
+          	   			.append("fixprice INTEGER,")//수리비용
+          	   			.append("depositdate DATE,")//납입기한
+          	   			.append("etcfix varchar(45)")//기타정비내역
+          	   			.append(");").toString();
+          	   	stmt.execute(sql[5]);
+          	   	sb.delete(0,  sb.length());
+          ```
+
+          <br/>
+
+       7. carcenterlist (정비소 테이블)
+
+          ```java
+           // CarcenterList
+          	   	sql[6] = sb.append("create table CarcenterList(")//table7
+          	   			.append("carcenterid INTEGER PRIMARY KEY,")//캠핑카정비소ID
+          	   			.append("carcentername varchar(45),")//정비소명
+          	   			.append("carcenteraddress varchar(45),")//정비소주소
+          	   			.append("carcenterphone varchar(45),")//정비소전화번호
+          	   			.append("centermanagername varchar(45),")//담당자이름
+          	   			.append("centermanageremail varchar(45)")//이메일정보
+          	   			.append(");").toString();
+          	   	stmt.execute(sql[6]);
+          	   	sb.delete(0,  sb.length());
+          ```
+
+          <br/>
+
+       8. availablecampingcarlist (대여가 가능한 캠핑카 테이블)
+
+          ```java
+          // AvailableCampingcarlist
+          	   	sql[7] = sb.append("create table AvailableCampingcarlist(")//table8
+          	   			.append("carid INTEGER PRIMARY KEY,")//캠핑카등록ID
+          	               .append("carname varchar(45),")//캠핑카 이름
+          	               .append("carnumber INTEGER,")//캠핑카 차량번호
+          	               .append("carmax INTEGER,")//캠핑카 인원수
+          	               .append("carbrand varchar(45),")//차제조회사
+          	               .append("birthday DATE,")//제조연도
+          	               .append("distance INTEGER,")//누적주행거리
+          	               .append("rentprice INTEGER,")//캠핑카대여비용
+          	               .append("companyid INTEGER,")//캠핑카대여회사ID
+          	               .append("enrolldate DATE")//캠핑카등록일자
+          	               .append(");").toString();
+          		   	stmt.execute(sql[7]);
+          		   	sb.delete(0,sb.length());
+          ```
+
+          <br/>
+
+     - #### 데이터 초기화(초기 데이터 생성)
 
        ```java
           public void insertMydata() { //초기data구현
@@ -465,283 +487,318 @@
 
 3. > ### 데이터 조작
 
-   "**관리자**"의 데이터 조작에는 **입력, 삭제, 변경, 반환** 총 4가지가 기능 존재
+   **관리자**는 (**입력, 삭제, 변경, 반환**) 4가지 조작을 하고 **고객**은 대여신청을 통해(**입력**) 1가지 조작을 한다.
 
    </br>
 
-   1. > #### 입력
+   #### 쿼리 형식
 
-      ```java
-      if(selectnumber.compareTo("1")==0)//'입력'선택시 각 테이블에 맞는 쿼리 입력
-               	 {
-          //tablenumber = 1: 대여회사  2: 캠핑카  3: 고객  4: 정비소  5. 정비정보
-               		if(tablenumber.compareTo("1")==0)
-                  	 {
-                  		 query = "insert into companylist values("+data1+",'"+data2+"','"+data3+"','"+data4+"','"+data5+"','"+data6+"')";
-                  		 stmt.executeUpdate(query); //쿼리 실행
-                  		 txtResult2.setText("캠핑카 대여회사 테이블에 캠핑카대여회사ID가 "+data1+"인 data가 입력되었습니다.");
-                  	 }
-                  	 else if(tablenumber.compareTo("2")==0)
-                  	 {
-                  		 query = "insert into campingcarlist values("+data1+",'"+data2+"',"+data3+","+data4+",'"+data5+"',STR_TO_DATE('"+data6+"','%Y-%m-%d'),"+data7+","+data8+","+data9+",STR_TO_DATE('"+data10+"','%Y-%m-%d'))";
-                  		 stmt.executeUpdate(query);
-                           
-                  		 query = "insert into availablecampingcarlist values("+data1+",'"+data2+"',"+data3+","+data4+",'"+data5+"',STR_TO_DATE('"+data6+"','%Y-%m-%d'),"+data7+","+data8+","+data9+",STR_TO_DATE('"+data10+"','%Y-%m-%d'))";
-                  		stmt.executeUpdate(query);
-                 		 txtResult2.setText("캠핑카 테이블에 캠핑카등록ID가 "+data1+"인 data가 입력되었습니다.");
-                  	 }
-                  	 else if(tablenumber.compareTo("3")==0)
-                  	 {
-                  		 query = "insert into campingcustomer values("+data1+",'"+data2+"','"+data3+"','"+data4+"','"+data5+"')";
-                  		 stmt.executeUpdate(query);
-                  		 txtResult2.setText("고객 테이블에 운전면허증번호가 "+data1+"인 data가 입력되었습니다.");
-                  	 }
-                  	 else if(tablenumber.compareTo("4")==0)
-                  	 {
-                  		 query = "insert into carcenterlist values("+data1+",'"+data2+"','"+data3+"','"+data4+"','"+data5+"','"+data6+"')";
-                  		 stmt.executeUpdate(query);
-                  		 txtResult2.setText("캠핑카정비소 테이블에 캠핑카정비소ID가 "+data1+"인 data가 입력되었습니다.");
-                  	 }
-                  	 else if(tablenumber.compareTo("5")==0)
-                  	 {
-                  		 query = "insert into FixInformation values("+data1+","+data2+","+data3+","+data4+","+data5+",'"+data6+"',STR_TO_DATE('"+data7+"','%Y-%m-%d'),"+data8+",STR_TO_DATE('"+data9+"','%Y-%m-%d'),'"+data10+"')";
-                  		 stmt.executeUpdate(query);
-                 		 txtResult2.setText("캠핑카정비정보 테이블에 고유정비번호가 "+data1+"인 data가 입력되었습니다.");
-                  	 }
-               	 }
-      ```
+   - #### 관리자
 
-      </br>
+     - **입력**
 
-   2. > #### 삭제
+       INSERT INTO 테이블명 VALUES (속성1, 속성2, 속성3...);
 
-      ```java
-      else if(selectnumber.compareTo("2")==0) //'삭제' 선택시 각 테이블에 맞는 쿼리 입력
-               	 {
-          //tablenumber = 1: 대여회사  2: 캠핑카  3: 고객  4: 정비소  5. 정비정보
-               		if(tablenumber.compareTo("1")==0)
+     - **삭제**
+
+       DELETE FROM 테이블명 WHERE 조건 ;
+
+     - **변경**
+
+       UPDATE 테이블명 SET 속성=변경값 WHERE 조건;
+
+     - **반환**
+
+       INSERT문과 DELETE문을 사용하여 '대여가능 캠핑카 목록' 테이블에 삽입 후, '현재 캠핑카 대여 목록'에서 해당 캠핑카 삭제
+
+     </br>
+
+   - #### 고객
+
+     - **입력**
+
+       INSERT문과 DELETE문을 사용하여 '현재 캠핑카 대여목록' 테이블에 삽입 후, '대여가능 캠핑카 목록'에서 해당 캠핑카 삭제 (관리자의 반환과 상반된 기능)
+
+       </br>
+
+     ---
+
+   - #### 관리자
+
+     1. > #### 입력
+
+        ```java
+        if(selectnumber.compareTo("1")==0)//'입력'선택시 각 테이블에 맞는 쿼리 입력
                  	 {
-               		query = "delete from companylist where companyid ="+ data1;
-               		stmt.executeUpdate(query);
-                 		txtResult2.setText("캠핑카 대여회사 테이블에서 캠핑카대여회사ID가 "+data1+" 인 data가 삭제되었습니다.");
-                 		 
+            //tablenumber = 1: 대여회사  2: 캠핑카  3: 고객  4: 정비소  5. 정비정보
+                 		if(tablenumber.compareTo("1")==0)
+                    	 {
+                    		 query = "insert into companylist values("+data1+",'"+data2+"','"+data3+"','"+data4+"','"+data5+"','"+data6+"')";
+                    		 stmt.executeUpdate(query); //쿼리 실행
+                    		 txtResult2.setText("캠핑카 대여회사 테이블에 캠핑카대여회사ID가 "+data1+"인 data가 입력되었습니다.");
+                    	 }
+                    	 else if(tablenumber.compareTo("2")==0)
+                    	 {
+                    		 query = "insert into campingcarlist values("+data1+",'"+data2+"',"+data3+","+data4+",'"+data5+"',STR_TO_DATE('"+data6+"','%Y-%m-%d'),"+data7+","+data8+","+data9+",STR_TO_DATE('"+data10+"','%Y-%m-%d'))";
+                    		 stmt.executeUpdate(query);
+                             
+                    		 query = "insert into availablecampingcarlist values("+data1+",'"+data2+"',"+data3+","+data4+",'"+data5+"',STR_TO_DATE('"+data6+"','%Y-%m-%d'),"+data7+","+data8+","+data9+",STR_TO_DATE('"+data10+"','%Y-%m-%d'))";
+                    		stmt.executeUpdate(query);
+                   		 txtResult2.setText("캠핑카 테이블에 캠핑카등록ID가 "+data1+"인 data가 입력되었습니다.");
+                    	 }
+                    	 else if(tablenumber.compareTo("3")==0)
+                    	 {
+                    		 query = "insert into campingcustomer values("+data1+",'"+data2+"','"+data3+"','"+data4+"','"+data5+"')";
+                    		 stmt.executeUpdate(query);
+                    		 txtResult2.setText("고객 테이블에 운전면허증번호가 "+data1+"인 data가 입력되었습니다.");
+                    	 }
+                    	 else if(tablenumber.compareTo("4")==0)
+                    	 {
+                    		 query = "insert into carcenterlist values("+data1+",'"+data2+"','"+data3+"','"+data4+"','"+data5+"','"+data6+"')";
+                    		 stmt.executeUpdate(query);
+                    		 txtResult2.setText("캠핑카정비소 테이블에 캠핑카정비소ID가 "+data1+"인 data가 입력되었습니다.");
+                    	 }
+                    	 else if(tablenumber.compareTo("5")==0)
+                    	 {
+                    		 query = "insert into FixInformation values("+data1+","+data2+","+data3+","+data4+","+data5+",'"+data6+"',STR_TO_DATE('"+data7+"','%Y-%m-%d'),"+data8+",STR_TO_DATE('"+data9+"','%Y-%m-%d'),'"+data10+"')";
+                    		 stmt.executeUpdate(query);
+                   		 txtResult2.setText("캠핑카정비정보 테이블에 고유정비번호가 "+data1+"인 data가 입력되었습니다.");
+                    	 }
                  	 }
-                 	 else if(tablenumber.compareTo("2")==0)
+        ```
+
+        </br>
+
+     2. > #### 삭제
+
+        ```java
+        else if(selectnumber.compareTo("2")==0) //'삭제' 선택시 각 테이블에 맞는 쿼리 입력
                  	 {
-                 		query = "delete from campingcarlist where carid ="+ data1;
-               		stmt.executeUpdate(query);
-               		query = "delete from availablecampingcarlist where carid ="+ data1;
-               		stmt.executeUpdate(query);
-                 		txtResult2.setText("캠핑카테이블 및 현재 대여가능한 캠핑카테이블에서 캠핑카등록ID가 "+data1+" 인 data가 삭제되었습니다.");
+            //tablenumber = 1: 대여회사  2: 캠핑카  3: 고객  4: 정비소  5. 정비정보
+                 		if(tablenumber.compareTo("1")==0)
+                   	 {
+                 		query = "delete from companylist where companyid ="+ data1;
+                 		stmt.executeUpdate(query);
+                   		txtResult2.setText("캠핑카 대여회사 테이블에서 캠핑카대여회사ID가 "+data1+" 인 data가 삭제되었습니다.");
+                   		 
+                   	 }
+                   	 else if(tablenumber.compareTo("2")==0)
+                   	 {
+                   		query = "delete from campingcarlist where carid ="+ data1;
+                 		stmt.executeUpdate(query);
+                 		query = "delete from availablecampingcarlist where carid ="+ data1;
+                 		stmt.executeUpdate(query);
+                   		txtResult2.setText("캠핑카테이블 및 현재 대여가능한 캠핑카테이블에서 캠핑카등록ID가 "+data1+" 인 data가 삭제되었습니다.");
+                   	 }
+                   	 else if(tablenumber.compareTo("3")==0)
+                   	 {
+                   		query = "delete from campingcustomer where licenseid ="+ data1;
+                 		stmt.executeUpdate(query);
+                   		txtResult2.setText("고객 테이블에서 운전면허증번호가 "+data1+" 인 data가 삭제되었습니다.");
+                   	 }
+                   	 else if(tablenumber.compareTo("4")==0)
+                   	 {
+                   		query = "delete from carcenterlist where carcenterid ="+ data1;
+                 		stmt.executeUpdate(query);
+                   		txtResult2.setText("캠핑카정비소  테이블에서 캠핑카정비소ID가 "+data1+" 인 data가 삭제되었습니다.");
+                   	 }
+                   	 else if(tablenumber.compareTo("5")==0)
+                   	 {
+                   		query = "delete from fixinformation where fixid ="+ data1;
+                 		stmt.executeUpdate(query);
+                   		txtResult2.setText("정비정보 테이블에서 고유정비번호가 "+data1+" 인 data가 삭제되었습니다.");
+                   	 }
                  	 }
-                 	 else if(tablenumber.compareTo("3")==0)
+        ```
+
+        </br>
+
+     3. > #### 변경
+
+        ```java
+         else if(selectnumber.compareTo("3")==0)//'변경'선택시 각 테이블에 맞는 쿼리 입력
                  	 {
-                 		query = "delete from campingcustomer where licenseid ="+ data1;
-               		stmt.executeUpdate(query);
-                 		txtResult2.setText("고객 테이블에서 운전면허증번호가 "+data1+" 인 data가 삭제되었습니다.");
+                 //tablenumber = 1: 대여회사  2: 캠핑카  3: 고객  4: 정비소  5. 정비정보
+                 		 String s[],d[];
+                 		if(tablenumber.compareTo("1")==0)
+                 		{
+                 			s=new String[] {"companyid","companyname","companyaddress","companyphone","managername","manageremail"};
+                 			d=new String[] {data1,data2,data3,data4,data5,data6};
+                 			for(int i=1;i<s.length;i++)
+                 			{
+                 				if(d[i]!=null)
+                 				{
+                 					query = "update companylist set "+s[i]+" = '"+d[i]+"' where companyid = "+d[0];
+                 					stmt.executeUpdate(query);
+                 	           		
+                 				}
+                 				else
+                 					continue;
+                 				
+                 			}
+                 			txtResult2.setText("캠핑카 대여회사 테이블에서 캠핑카대여회사ID가 "+data1+" 인 data가 변경되었습니다.");
+        //         			
+                 		}
+                 		else if(tablenumber.compareTo("2")==0)
+                 		{
+                 			s = new String[] {"carid","carname","carnumber","carmax","carbrand","birthday","distance","rentprice","companyid","enrolldate"};
+                 			d = new String[] {data1,data2,data3,data4,data5,data6,data7,data8,data9,data10};
+                 			for(int i=1;i<s.length;i++)
+                 			{
+                 				if(d[i]!=null)
+                 				{	
+                 					if(i==1 || i==4 )
+                 						d[i] ="'"+d[i]+"'";
+                 					else if(i==5 || i==9)
+                 						d[i] ="STR_TO_DATE('"+d[i]+"','%Y-%m-%d')";
+                 					query = "update campingcarlist set "+s[i]+" = "+d[i]+" where carid = "+d[0];
+                 					stmt.executeUpdate(query);
+                 					query = "update availablecampingcarlist set "+s[i]+" = "+d[i]+" where carid = "+d[0];
+                 					stmt.executeUpdate(query);
+                 				}
+                 				else
+                 					continue;
+                 			}
+                 			txtResult2.setText("캠핑카 테이블에서 캠핑카등록ID가 "+data1+" 인 data가 변경되었습니다.");
+                 		}
+                 		else if(tablenumber.compareTo("3")==0)
+                 		{
+                 			s = new String[] {"licenseid","customername","customeraddress","customerphone","customeremail"};
+                 			d = new String[] {data1,data2,data3,data4,data5};
+                 			for(int i=1;i<s.length;i++)
+                 			{
+                 				if(d[i]!=null)
+                 				{	
+               						d[i] ="'"+d[i]+"'";         					
+                 					query = "update campingcustomer set "+s[i]+" = "+d[i]+" where licenseid = "+d[0];
+                 					stmt.executeUpdate(query);
+                 				}
+                 				else
+                 					continue;
+                 			}
+                 			txtResult2.setText("고객 테이블에서 운전면허증번호가 "+data1+" 인 data가 변경되었습니다.");
+                 		}
+                 		else if(tablenumber.compareTo("4")==0)
+                 		{
+                 			s = new String[] {"carcenterid","carcentername","carcenteraddress","carcenterphone","centermanagername","centermanageremail"};
+                 			d = new String[] {data1,data2,data3,data4,data5,data6};
+                 			for(int i=1;i<s.length;i++)
+                 			{
+                 				if(d[i]!=null)
+                 				{	
+               						d[i] ="'"+d[i]+"'";         					
+                 					query = "update carcenterlist set "+s[i]+" = "+d[i]+" where carcenterid = "+d[0];
+                 					stmt.executeUpdate(query);
+                 				}
+                 				else
+                 					continue;
+                 			}
+                 			txtResult2.setText("캠핑카정비소 테이블에서 정비소ID가 "+data1+" 인 data가 변경되었습니다.");
+                 		}
+                 		else if(tablenumber.compareTo("5")==0)
+                 		{
+                 			s = new String[] {"fixid","carid","carcenterid","companyid","licenseid","fix","fixdate","fixprice","depositdate","etcfix"};
+                 			d = new String[] {data1,data2,data3,data4,data5,data6,data7,data8,data9,data10};
+                 			for(int i=1;i<s.length;i++)
+                 			{
+                 				if(d[i]!=null)
+                 				{	
+                 					if(i==5 || i==9 )
+                 						d[i] ="'"+d[i]+"'";
+                 					else if(i==6 || i==8)
+                 						d[i] ="STR_TO_DATE('"+d[i]+"','%Y-%m-%d')";
+                 					query = "update FixInformation set "+s[i]+" = "+d[i]+" where fixid = "+d[0];
+                 					stmt.executeUpdate(query);
+                 				}
+                 				else
+                 					continue;
+                 			}
+                 			txtResult2.setText("정비정보 테이블에서 고유정비번호가 "+data1+" 인 data가 변경되었습니다.");
+                 		}
                  	 }
-                 	 else if(tablenumber.compareTo("4")==0)
-                 	 {
-                 		query = "delete from carcenterlist where carcenterid ="+ data1;
-               		stmt.executeUpdate(query);
-                 		txtResult2.setText("캠핑카정비소  테이블에서 캠핑카정비소ID가 "+data1+" 인 data가 삭제되었습니다.");
-                 	 }
-                 	 else if(tablenumber.compareTo("5")==0)
-                 	 {
-                 		query = "delete from fixinformation where fixid ="+ data1;
-               		stmt.executeUpdate(query);
-                 		txtResult2.setText("정비정보 테이블에서 고유정비번호가 "+data1+" 인 data가 삭제되었습니다.");
-                 	 }
-               	 }
-      ```
+        ```
 
-      </br>
+        </br>
 
-   3. > #### 변경
+     4. > #### 반환
 
-      ```java
-       else if(selectnumber.compareTo("3")==0)//'변경'선택시 각 테이블에 맞는 쿼리 입력
-               	 {
-               //tablenumber = 1: 대여회사  2: 캠핑카  3: 고객  4: 정비소  5. 정비정보
-               		 String s[],d[];
-               		if(tablenumber.compareTo("1")==0)
-               		{
-               			s=new String[] {"companyid","companyname","companyaddress","companyphone","managername","manageremail"};
-               			d=new String[] {data1,data2,data3,data4,data5,data6};
-               			for(int i=1;i<s.length;i++)
-               			{
-               				if(d[i]!=null)
-               				{
-               					query = "update companylist set "+s[i]+" = '"+d[i]+"' where companyid = "+d[0];
-               					stmt.executeUpdate(query);
-               	           		
-               				}
-               				else
-               					continue;
-               				
-               			}
-               			txtResult2.setText("캠핑카 대여회사 테이블에서 캠핑카대여회사ID가 "+data1+" 인 data가 변경되었습니다.");
-      //         			
-               		}
-               		else if(tablenumber.compareTo("2")==0)
-               		{
-               			s = new String[] {"carid","carname","carnumber","carmax","carbrand","birthday","distance","rentprice","companyid","enrolldate"};
-               			d = new String[] {data1,data2,data3,data4,data5,data6,data7,data8,data9,data10};
-               			for(int i=1;i<s.length;i++)
-               			{
-               				if(d[i]!=null)
-               				{	
-               					if(i==1 || i==4 )
-               						d[i] ="'"+d[i]+"'";
-               					else if(i==5 || i==9)
-               						d[i] ="STR_TO_DATE('"+d[i]+"','%Y-%m-%d')";
-               					query = "update campingcarlist set "+s[i]+" = "+d[i]+" where carid = "+d[0];
-               					stmt.executeUpdate(query);
-               					query = "update availablecampingcarlist set "+s[i]+" = "+d[i]+" where carid = "+d[0];
-               					stmt.executeUpdate(query);
-               				}
-               				else
-               					continue;
-               			}
-               			txtResult2.setText("캠핑카 테이블에서 캠핑카등록ID가 "+data1+" 인 data가 변경되었습니다.");
-               		}
-               		else if(tablenumber.compareTo("3")==0)
-               		{
-               			s = new String[] {"licenseid","customername","customeraddress","customerphone","customeremail"};
-               			d = new String[] {data1,data2,data3,data4,data5};
-               			for(int i=1;i<s.length;i++)
-               			{
-               				if(d[i]!=null)
-               				{	
-             						d[i] ="'"+d[i]+"'";         					
-               					query = "update campingcustomer set "+s[i]+" = "+d[i]+" where licenseid = "+d[0];
-               					stmt.executeUpdate(query);
-               				}
-               				else
-               					continue;
-               			}
-               			txtResult2.setText("고객 테이블에서 운전면허증번호가 "+data1+" 인 data가 변경되었습니다.");
-               		}
-               		else if(tablenumber.compareTo("4")==0)
-               		{
-               			s = new String[] {"carcenterid","carcentername","carcenteraddress","carcenterphone","centermanagername","centermanageremail"};
-               			d = new String[] {data1,data2,data3,data4,data5,data6};
-               			for(int i=1;i<s.length;i++)
-               			{
-               				if(d[i]!=null)
-               				{	
-             						d[i] ="'"+d[i]+"'";         					
-               					query = "update carcenterlist set "+s[i]+" = "+d[i]+" where carcenterid = "+d[0];
-               					stmt.executeUpdate(query);
-               				}
-               				else
-               					continue;
-               			}
-               			txtResult2.setText("캠핑카정비소 테이블에서 정비소ID가 "+data1+" 인 data가 변경되었습니다.");
-               		}
-               		else if(tablenumber.compareTo("5")==0)
-               		{
-               			s = new String[] {"fixid","carid","carcenterid","companyid","licenseid","fix","fixdate","fixprice","depositdate","etcfix"};
-               			d = new String[] {data1,data2,data3,data4,data5,data6,data7,data8,data9,data10};
-               			for(int i=1;i<s.length;i++)
-               			{
-               				if(d[i]!=null)
-               				{	
-               					if(i==5 || i==9 )
-               						d[i] ="'"+d[i]+"'";
-               					else if(i==6 || i==8)
-               						d[i] ="STR_TO_DATE('"+d[i]+"','%Y-%m-%d')";
-               					query = "update FixInformation set "+s[i]+" = "+d[i]+" where fixid = "+d[0];
-               					stmt.executeUpdate(query);
-               				}
-               				else
-               					continue;
-               			}
-               			txtResult2.setText("정비정보 테이블에서 고유정비번호가 "+data1+" 인 data가 변경되었습니다.");
-               		}
-               	 }
-      ```
+        고객이 캠핑카를 반납할 때 '차의 상태', '수리 여부'를 등록하기 위해 사용하는 기능
 
-      </br>
-
-   4. > #### 반환
-
-      고객이 캠핑카를 반납할 때 '차의 상태', '수리 여부'를 등록하기 위해 사용하는 기능
-
-      ```java
-      else if(selectnumber.compareTo("4")==0)//'반환'선택시
-      /*
-      '반환'에서 차에 이상이 있을 시 점검내역을 저장해야 하므로
-      점검내역을 carcheck 테이블에 저장하고
-      presentrentcampingcar 테이블에서 해당 캠핑카를 삭제한다.
-      */
-               		{
-               			String str="";
-               		//점검내역 저장
-               			query = "insert into CarCheck values("+data1+","+data2+",'"+data3+"','"+data4+"','"+data5+"','"+data6+"',"+data7+","+data8+")";
-               			stmt.executeUpdate(query);
-               		//현재 대여목록에서 delete
-               				query = "delete from PresentRentCampingcarList where rentid = "+data1;
-               				stmt.executeUpdate(query);
-               		
-               		//수리가 필요하지 않으면 대여가능한 목록으로 이동
-               			if(data7.compareTo("0")==0)
-               			{
-               				query = "select * from Campingcarlist where carid = "+data2;
-               				rs = stmt.executeQuery(query);
-               				while (rs.next()) {
-               					str ="insert into availablecampingcarlist values("+rs.getInt(1)+",'"+rs.getString(2)+"',"+rs.getInt(3)+","+rs.getInt(4)+",'"+rs.getString(5)+"',STR_TO_DATE('"+rs.getString(6)+"','%Y-%m-%d'),"+rs.getInt(7)+","+rs.getInt(8)+","+rs.getInt(9)+",STR_TO_DATE('"+rs.getString(10)+"','%Y-%m-%d'))";
-               	                
-               	        						}
-               				stmt.executeUpdate(str);
-               				
-               			}
-               			
-               			txtResult2.setText("고유대여번호가 "+data1+"인 차량이 반환되었습니다.");
-               		}
-      ```
-
-      
-
-   </br>
-
-   "**고객**"의 데이터 조작에는 **대여 신청** 기능만 존재
-
-   ```java
-    if (e.getSource() == btnRent) { // '대여 신청'을 눌렀을 때
+        ```java
+        else if(selectnumber.compareTo("4")==0)//'반환'선택시
         /*
-        현재 대여중 캠핑카 테이블에 INSERT,
-        대여가능 캠핑카 테이블에서 DELETE
+        '반환'에서 차에 이상이 있을 시 점검내역을 저장해야 하므로
+        점검내역을 carcheck 테이블에 저장하고
+        presentrentcampingcar 테이블에서 해당 캠핑카를 삭제한다.
         */
-           	 String licenseid, carid,startdate,rentdays;
-           	 int rentprice=0,companyid=0; 
-           	 licenseid = txtField1.getText();
-           	 carid = txtField2.getText();
-           	 startdate = txtField3.getText();
-           	 rentdays = txtField4.getText();
-           	 
-           	 txtField1.setText("");
-           	 txtField2.setText("");
-           	 txtField3.setText("");
-           	 txtField4.setText("");
-           	 
-           	 query = "select * from Campingcarlist where carid="+carid;
-           	 
-           	 rs = stmt.executeQuery(query);
-           	 	
-           	 while(rs.next()) {
-           		  companyid = rs.getInt(9);
-           		  rentprice = rs.getInt(8);
-           	 }
-           	 stmt.executeUpdate("INSERT INTO PresentRentCampingcarList VALUES ("+rentid+","+carid+","+licenseid+","+companyid+","+ "STR_TO_DATE('"+startdate+"','%Y-%m-%d'),STR_TO_DATE('"+startdate+"','%Y-%m-%d')-1+"+rentdays+","+rentprice+"*"+rentdays+",STR_TO_DATE('"+startdate+"','%Y-%m-%d')-1,NULL,NULL)");
-           	 rentid++;
-           	 	stmt.executeUpdate("DELETE from availablecampingcarlist where carid="+carid);
-           	 txtResult.setText("렌트완료");
-           	 
-               }
-   ```
+                 		{
+                 			String str="";
+                 		//점검내역 저장
+                 			query = "insert into CarCheck values("+data1+","+data2+",'"+data3+"','"+data4+"','"+data5+"','"+data6+"',"+data7+","+data8+")";
+                 			stmt.executeUpdate(query);
+                 		//현재 대여목록에서 delete
+                 				query = "delete from PresentRentCampingcarList where rentid = "+data1;
+                 				stmt.executeUpdate(query);
+                 		
+                 		//수리가 필요하지 않으면 대여가능한 목록으로 이동
+                 			if(data7.compareTo("0")==0)
+                 			{
+                 				query = "select * from Campingcarlist where carid = "+data2;
+                 				rs = stmt.executeQuery(query);
+                 				while (rs.next()) {
+                 					str ="insert into availablecampingcarlist values("+rs.getInt(1)+",'"+rs.getString(2)+"',"+rs.getInt(3)+","+rs.getInt(4)+",'"+rs.getString(5)+"',STR_TO_DATE('"+rs.getString(6)+"','%Y-%m-%d'),"+rs.getInt(7)+","+rs.getInt(8)+","+rs.getInt(9)+",STR_TO_DATE('"+rs.getString(10)+"','%Y-%m-%d'))";
+                 	                
+                 	        						}
+                 				stmt.executeUpdate(str);
+                 				
+                 			}
+                 			
+                 			txtResult2.setText("고유대여번호가 "+data1+"인 차량이 반환되었습니다.");
+                 		}
+        ```
 
-   </br>
+
+     </br>
+
+   - #### 고객
+
+     "**고객**"의 데이터 조작에는 **대여 신청** 기능만 존재
+
+     ```java
+      if (e.getSource() == btnRent) { // '대여 신청'을 눌렀을 때
+          /*
+          현재 대여중 캠핑카 테이블에 INSERT,
+          대여가능 캠핑카 테이블에서 DELETE
+          */
+             	 String licenseid, carid,startdate,rentdays;
+             	 int rentprice=0,companyid=0; 
+             	 licenseid = txtField1.getText();
+             	 carid = txtField2.getText();
+             	 startdate = txtField3.getText();
+             	 rentdays = txtField4.getText();
+             	 
+             	 txtField1.setText("");
+             	 txtField2.setText("");
+             	 txtField3.setText("");
+             	 txtField4.setText("");
+             	 
+             	 query = "select * from Campingcarlist where carid="+carid;
+             	 
+             	 rs = stmt.executeQuery(query);
+             	 	
+             	 while(rs.next()) {
+             		  companyid = rs.getInt(9);
+             		  rentprice = rs.getInt(8);
+             	 }
+             	 stmt.executeUpdate("INSERT INTO PresentRentCampingcarList VALUES ("+rentid+","+carid+","+licenseid+","+companyid+","+ "STR_TO_DATE('"+startdate+"','%Y-%m-%d'),STR_TO_DATE('"+startdate+"','%Y-%m-%d')-1+"+rentdays+","+rentprice+"*"+rentdays+",STR_TO_DATE('"+startdate+"','%Y-%m-%d')-1,NULL,NULL)");
+             	 rentid++;
+             	 	stmt.executeUpdate("DELETE from availablecampingcarlist where carid="+carid);
+             	 txtResult.setText("렌트완료");
+             	 
+                 }
+     ```
+
+     </br>
 
    ---
 
@@ -750,6 +807,16 @@
    데이터 검색은  **"고객"**, **"관리자"** 모두 할 수 있는 기능
 
    </br>
+
+   #### 쿼리 형식
+
+   - **데이터 검색**
+
+     SELECT 속성1, 속성2... FROM 테이블명 WHERE 조건;
+
+     </br>
+
+     ---
 
    - > #### 고객
 
