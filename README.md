@@ -43,7 +43,7 @@
 
 - ### 사용기술(개발환경)
 
-  JAVA(swing GUI), MySQL
+  JAVA, MySQL
 
 - ### 소스코드
 
@@ -59,7 +59,7 @@
 
 - ### 관리자
 
-  > 1. ### 데이터 초기화
+  ### 1. 데이터 초기화
 
   <img src = "https://github.com/JIHYEOK0801/record/blob/main/DBcampingcar/img/new_1.gif?raw=true">
 
@@ -70,7 +70,7 @@
 
   </br>
 
-  > 2. ### 데이터 삽입/삭제/변경
+  ### 2. 데이터 삽입/삭제/변경
 
   <img src = "https://github.com/JIHYEOK0801/record/blob/main/DBcampingcar/img/new_2.gif?raw=true">
 
@@ -87,16 +87,16 @@
 
   </br>
 
-  3. > ### 검색기능
+  ### 3. 검색기능
 
-     <img src = "https://github.com/JIHYEOK0801/record/blob/main/DBcampingcar/img/new_4.gif?raw=true">
+  <img src = "https://github.com/JIHYEOK0801/record/blob/main/DBcampingcar/img/new_4.gif?raw=true">
 
-     관리자의 검색기능 4가지
+  관리자의 검색기능 4가지
 
-     - 대여고객 및 대여차량 테이블 검색 기능
-     - 반납 후 수리가 필요한 차량 테이블 검색 기능
-     - 정비소별 정비내역 테이블 검색 기능
-     - 고객별 청구 수리비용 검색 기능
+  - 대여고객 및 대여차량 테이블 검색 기능
+  - 반납 후 수리가 필요한 차량 테이블 검색 기능
+  - 정비소별 정비내역 테이블 검색 기능
+  - 고객별 청구 수리비용 검색 기능
 
   </br>
 
@@ -104,7 +104,7 @@
 
 - ### 고객
 
-  1. > ### 대여가능 캠핑카 검색
+  1. ### 대여가능 캠핑카 검색
 
      <img src = "https://github.com/JIHYEOK0801/record/blob/main/DBcampingcar/img/new_5.gif?raw=true">
 
@@ -113,7 +113,7 @@
 
      </br>
 
-  2. > ### 캠핑카 대여 신청
+  2. ### 캠핑카 대여 신청
 
      <img src = "https://github.com/JIHYEOK0801/record/blob/main/DBcampingcar/img/new_6.gif?raw=true">
 
