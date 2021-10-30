@@ -33,7 +33,7 @@
 
 - ### 개발주제
 
-  관리자와 고객이 사용가능한 '캠핑카 대여 어플리케이션' 개발
+  데이터베이스를 사용하여 관리자와 고객이 사용가능한 '캠핑카 대여 어플리케이션' 개발
 
 
 - ### 개발기간
@@ -173,8 +173,6 @@
 
    - > ### 테이블 생성 및 초기화
 
-     #### 쿼리형식
-
      **테이블 생성**
 
      CREATE TABLE 테이블명 (속성1, 속성2, 속성3...);
@@ -190,7 +188,7 @@
        1. companylist (대여회사 정보)
 
           ```java
-          // Companylist
+       // Companylist
           	   sql[0] = sb.append("create table Companylist(")//table1
                          .append("companyid INTEGER PRIMARY KEY,")//캠핑카대여회사ID
                          .append("companyname varchar(45),")//회사명
@@ -202,13 +200,13 @@
           	   	stmt.execute(sql[0]);
           	   	sb.delete(0,sb.length());
           ```
-
+     
           </br>
 
        2. campingcarlist (캠핑카 정보)
 
           ```java
-          // Campingcarlist availablecampingcarlist
+       // Campingcarlist availablecampingcarlist
           	   sql[1] = sb.append("create table Campingcarlist(")//table2
                          .append("carid INTEGER PRIMARY KEY,")//캠핑카등록ID
                          .append("carname varchar(45),")//캠핑카 이름
@@ -224,13 +222,13 @@
           	   	stmt.execute(sql[1]);
           	   	sb.delete(0,sb.length());
           ```
-
+     
           <br/>
 
        3. campingcustomer (고객 테이블)
 
           ```java
-          // CampingCustomer 
+       // CampingCustomer 
           	   	sql[2] = sb.append("create table CampingCustomer(")//table3
           	   			.append("licenseid INTEGER PRIMARY KEY,")//운전면허증번호
           	   			.append("customername varchar(45),")//고객명
@@ -241,13 +239,13 @@
           	   	stmt.execute(sql[2]);
           	   	sb.delete(0, sb.length());
           ```
-
+     
           <br/>
 
        4. presentrentcampingcarlist (현재 대여중인 캠핑카 테이블)
 
           ```java
-          //  PresentRentCampingcarList
+       //  PresentRentCampingcarList
           	   	sql[3] = sb.append("create table PresentRentCampingcarList(")//table4
           	   			.append("rentid INTEGER PRIMARY KEY,")//고유대여번호
           	   			.append("carid INTEGER,")//캠핑카등록ID
@@ -263,13 +261,13 @@
           	   	stmt.execute(sql[3]);
           	   	sb.delete(0,  sb.length());
           ```
-
+     
           <br/>
 
        5. carcheck (반환 후 수리가 필요한 차량 테이블)
 
           ```java
-          // CarCheck
+       // CarCheck
           	   	sql[4] = sb.append("create table CarCheck(")//table5
           	   			.append("rentid INTEGER PRIMARY KEY,")//고유대여번호
           	   			.append("carid INTEGER,")//캠핑카등록ID
@@ -283,13 +281,13 @@
           	   	stmt.execute(sql[4]);
           	   	sb.delete(0,  sb.length());
           ```
-
+     
           </br>
 
        6. fixinformation (정비소별 정비내역 테이블)
 
           ```java
-          // FixInformation
+       // FixInformation
           	   	sql[5] = sb.append("create table FixInformation(")//table6
           	   			.append("fixid INTEGER PRIMARY KEY,")//고유정비번호
           	   			.append("carid INTEGER,")//캠핑카등록ID
@@ -305,13 +303,13 @@
           	   	stmt.execute(sql[5]);
           	   	sb.delete(0,  sb.length());
           ```
-
+     
           <br/>
 
        7. carcenterlist (정비소 테이블)
 
           ```java
-           // CarcenterList
+        // CarcenterList
           	   	sql[6] = sb.append("create table CarcenterList(")//table7
           	   			.append("carcenterid INTEGER PRIMARY KEY,")//캠핑카정비소ID
           	   			.append("carcentername varchar(45),")//정비소명
@@ -323,13 +321,13 @@
           	   	stmt.execute(sql[6]);
           	   	sb.delete(0,  sb.length());
           ```
-
+     
           <br/>
 
        8. availablecampingcarlist (대여가 가능한 캠핑카 테이블)
 
           ```java
-          // AvailableCampingcarlist
+       // AvailableCampingcarlist
           	   	sql[7] = sb.append("create table AvailableCampingcarlist(")//table8
           	   			.append("carid INTEGER PRIMARY KEY,")//캠핑카등록ID
           	               .append("carname varchar(45),")//캠핑카 이름
@@ -345,13 +343,13 @@
           		   	stmt.execute(sql[7]);
           		   	sb.delete(0,sb.length());
           ```
-
+     
           <br/>
 
      - > #### 데이터 초기화(초기 데이터 생성)
 
        ```java
-          public void insertMydata() { //초기data구현
+       public void insertMydata() { //초기data구현
        	try{
        		String delete[] = new String[6];
        		String insertCompanyList[] = new String[15];
@@ -474,14 +472,12 @@
        	}
           }
        ```
-
+     
        </br>
 
    ---
 
 3. > ### 데이터 조작
-
-   #### 쿼리 형식
 
    #### 관리자
 
@@ -552,7 +548,7 @@
                     	 }
                  	 }
         ```
-
+   
         </br>
 
      2. > #### 삭제
@@ -596,7 +592,7 @@
                    	 }
                  	 }
         ```
-
+   
         </br>
 
      3. > #### 변경
@@ -703,7 +699,7 @@
                  		}
                  	 }
         ```
-
+   
         </br>
 
      4. > #### 반환
@@ -786,11 +782,9 @@
 
      </br>
 
-   ---
+---
 
 4. ### 데이터 검색
-
-   #### 쿼리 형식
 
    **데이터 검색**
 
@@ -803,7 +797,7 @@
       **'대여가능한 캠핑카 목록 검색'** 
 
      ```java
-     else if(e.getSource() == UbtnSearch1) {//'대여가능한 캠핑카 목록 검색' 버튼을 눌렀을 때
+  else if(e.getSource() == UbtnSearch1) {//'대여가능한 캠핑카 목록 검색' 버튼을 눌렀을 때
              	 query = "SELECT * FROM availablecampingcarlist ";
              	txtResult.setText("");
              	txtResult.setText("차량 ID\t캠핑카이름\t차량번호 \t최대승차인원수  제조회사\t제조연도\t누적주행거리\t대여비용(1일)\t\n");
@@ -814,7 +808,7 @@
                      txtResult.append(str);
              						}
      ```
-
+   
      </br>
 
    - > #### 관리자
@@ -822,7 +816,7 @@
      1. **'대여고객 및 대여차량 검색'**
 
         ```java
-        else if(e.getSource() == AbtnSearch1) {//'대여고객 및 대여차량 검색' 버튼을 눌렀을 때
+     else if(e.getSource() == AbtnSearch1) {//'대여고객 및 대여차량 검색' 버튼을 눌렀을 때
                  	 query = "select presentrentcampingcarlist.rentid, campingcarlist.carid, campingcarlist.carname, campingcustomer.licenseid, campingcustomer.customername,  campingcarlist.carnumber " + 
                  	 		"from campingcustomer,presentrentcampingcarlist,campingcarlist " + 
                  	 		"where presentrentcampingcarlist.licenseid = campingcustomer.licenseid and presentrentcampingcarlist.carid = campingcarlist.carid;";
@@ -836,13 +830,13 @@
                   						}
                    }
         ```
-
+   
         </br>
 
      2. **'수리가 필요한 차량 검색'**
 
         ```java
-        else if(e.getSource() == AbtnSearch2) {//'수리가 필요한 차량 검색' 버튼을 눌렀을 때
+     else if(e.getSource() == AbtnSearch2) {//'수리가 필요한 차량 검색' 버튼을 눌렀을 때
                   	 query = "select campingcarlist.carid, campingcarlist.carname, campingcarlist.companyid, campingcustomer.licenseid, campingcustomer.customername, carcheck.frontdescription, carcheck.leftdescription, carcheck.rightdescription, carcheck.backdescription " + 
                   	 		"from carcheck,campingcarlist,campingcustomer " + 
                   	 		"where carcheck.havetofix=1 and carcheck.carID = campingcarlist.carid and carcheck.licenseid=campingcustomer.licenseid "+
@@ -857,13 +851,13 @@
                    						}
                     }
         ```
-
+   
         </br>
 
      3. **'정비소별 정비내역'**
 
         ```java
-        else if(e.getSource() == AbtnSearch3) {//'정비소별 정비 내역' 버튼을 눌렀을 때
+     else if(e.getSource() == AbtnSearch3) {//'정비소별 정비 내역' 버튼을 눌렀을 때
                    	 query = "select  carcenterlist.carcenterid, carcenterlist.carcentername, fixinformation.fixid, fixinformation.companyid, companylist.companyname, fixinformation.carid, campingcarlist.carname, fixinformation.fixdate " + 
                    	 		"from fixinformation,carcenterlist,campingcarlist,companylist " + 
                    	 		"where fixinformation.carcenterid = carcenterlist.carcenterid and fixinformation.carid = campingcarlist.carid and fixinformation.companyid = companylist.companyid " + 
@@ -878,13 +872,13 @@
                     						}
                      } 
         ```
-
+   
         </br>
 
      4. **'고객별 청구할 수리비용 검색'**
 
         ```java
-        else if(e.getSource() == AbtnSearch4) {//관리자용 검색4 버튼을 눌렀을 때
+     else if(e.getSource() == AbtnSearch4) {//관리자용 검색4 버튼을 눌렀을 때
                     	 query = "select campingcustomer.licenseid, campingcustomer.customername, sum(fixinformation.fixprice) " + 
                     	 		"from campingcustomer,fixinformation " + 
                     	 		"where campingcustomer.licenseid = fixinformation.licenseid " + 
@@ -900,7 +894,7 @@
                      						}
                       }
         ```
-
+   
      ​	</br>
 
    ---
